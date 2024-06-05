@@ -1,0 +1,36 @@
+.controls {
+    position: absolute;
+    z-index: 999;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    bottom: 20px;
+    &__prev {
+        box-sizing: border-box;
+        border: 1px solid rgb(3, 68, 220);
+        border-radius: 10px;
+        padding: 6px 12px;
+        opacity: 0;
+        cursor: pointer;
+        transition: 0.5s all;
+        &:hover {
+            background:#cfcfcf;
+        }
+    }
+    &__next {
+        box-sizing: border-box;
+        border: #fff solid 1px;
+        border-radius: 10px;
+        padding: 6px 12px;
+        transition: 0.5s all;
+        cursor: pointer;
+        &:hover {
+            background: rgb(143, 0, 0);
+        }
+        &_active {
+            background: rgb(255, 0, 0);
+        }
+    }
+}
+

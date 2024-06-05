@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина</title>
+    <style>
+        .victorina-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .victorina-question {
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="victorina-container">
+        <div class="victorina-question"></div>
+        <div class="controls">
+            <button class="controls__prev">Предыдущий</button>
+            <button class="controls__next">Следующий</button>
+        </div>
+        <div class="email-form hidden">
+            <h3>Заполните форму</h3>
+            <input type="email" id="email" placeholder="Ваш email">
+            <button id="submit-email">Отправить</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
