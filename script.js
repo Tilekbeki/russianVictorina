@@ -335,7 +335,10 @@ input.addEventListener("keypress", function(event) {
     if (currentQuestionIndex > 0) {
       currentQuestionIndex--;
       showQuestions();
+      
     }
+    changeCounter(currentQuestionIndex)
+
   });
   categoryAdult.classList.add('victorina-category__adult_active');
 

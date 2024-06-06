@@ -135,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.querySelector('.controls__next');
   const layerQuestion = document.querySelector('.victorina-question');
   const questionContainer = document.querySelector('.victorina-questions');
-  const logo = document.querySelector('.logo');
   const kidQuestions = [
     { question: "Какой праздник отмечается в России ежегодно 12 июня?", answers: ["День России", "день дружбы", "день спорта"],correct: "День России"},
     { question: "Что такое День России?", answers: ["день рождения страны", "государственный праздник", "день проведения концертов и парадов (правильный ответ)"],correct: "День России"},
@@ -217,7 +216,7 @@ const adultQuestions = [
     const options = document.querySelectorAll('input[name^="answer"]');
     options.forEach((item,i)=>{
       item.addEventListener('click', ()=>{
-        item.parentElement.parentElement.classList.toggle('chosedOption');
+        item.classList.toggle('chosedOption');
         if(choosedCategory == 'kids') {
           kidQuestions[currentQuestionIndex].class = `chosedOption=${i}`;
         } 
@@ -271,8 +270,6 @@ const adultQuestions = [
   }
 
   nextBtn.addEventListener('click', () => {
-    logo.style.display='block';
-    console.log(logo)
     nextBtn.classList.add('controls__next_active')
     layerQuestion.style.zIndex='2';
     layerQuestion.style.opacity='1';
@@ -289,41 +286,35 @@ const adultQuestions = [
       layerQuestion.classList.add('hidden');
       finishLayer.classList.remove('hidden');
       const input = document.getElementById("myData");
-
-input.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        const sum = userAnswers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        console.log(input.value); // Номер телефона или почта
-        console.log(choosedCategory); // Категория, которую он решил
-        console.log(sum); // Сумма баллов
-
-  
-
-        // Создаем объект FormData для сборки данных формы
-        let formData = new FormData();
-        formData.append('phone_or_email', input.value); // Добавляем номер телефона или почту
-        formData.append('category', choosedCategory); // Добавляем категорию
-        formData.append('points', sum.toString()); // Добавляем сумму баллов
-
-        // Отправляем данные на сервер
-        
-          fetch('gfg.php', {
-            method: 'POST',
-            body: formData,
-        })
-       .then(response => response.text())
-       .then(data => {
-            console.log(data); // Выводим ответ сервера в консоль
-            document.querySelector('.message').style.display='block';
-            localStorage.setItem('tested', 'yes');
-        })
-       .catch(error => {
-            console.error('Error:', error); // Выводим ошибку, если она произошла
-        });
-        
-
-    }
-});
+      input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          const sum = userAnswers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+            console.log(input.value); // Номер телефона или почта
+            console.log(choosedCategory); // Категория, которую он решил
+            console.log(sum); // Сумма баллов
+    
+            // Создаем объект FormData для сборки данных формы
+            let formData = new FormData();
+            formData.append('phone_or_email', input.value); // Добавляем номер телефона или почту
+            formData.append('category', choosedCategory); // Добавляем категорию
+            formData.append('points', sum.toString()); // Добавляем сумму баллов
+    
+            // Отправляем данные на сервер
+            fetch('gfg.php', { // Замените 'path_to_your_php_script.php' на путь к вашему PHP скрипту
+                method: 'POST',
+                body: formData,
+            })
+           .then(response => response.text()) // Получаем текст ответа
+           .then(data => {
+                console.log(data); // Выводим ответ сервера в консоль
+                document.querySelector('.message').style.display='block';
+                localStorage.setItem('tested', 'yes');
+            })
+           .catch(error => {
+                console.error('Error:', error); // Выводим ошибку, если она произошла
+            });
+        }
+    });
       
       // Здесь можно добавить логику для показа следующего шага или завершения теста
     }
@@ -335,11 +326,13 @@ input.addEventListener("keypress", function(event) {
     if (currentQuestionIndex > 0) {
       currentQuestionIndex--;
       showQuestions();
+      
     }
+    changeCounter(currentQuestionIndex)
   });
   categoryAdult.classList.add('victorina-category__adult_active');
 
   if(localStorage.getItem('tested')){
-    document.querySelector('.hello-again').style.display = 'block';
+    console.log('вы тут были');
   }
 });
